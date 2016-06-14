@@ -1,4 +1,4 @@
-package com.rush.wf;
+package com.rush.rainyhills;
 
 /**
  * Created by Ruslan Khalikov

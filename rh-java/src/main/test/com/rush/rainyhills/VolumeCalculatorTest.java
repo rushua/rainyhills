@@ -1,4 +1,4 @@
-package com.rush.wf;
+package com.rush.rainyhills;
 
 import org.junit.Assert;
 import org.junit.Ignore;
