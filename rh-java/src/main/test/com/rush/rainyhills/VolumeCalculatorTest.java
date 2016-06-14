@@ -9,20 +9,20 @@ import java.util.Arrays;
 /**
  * Created by Ruslan Khalikov
  * Date: 14.06.2016
- * Time: 15:09
+ * Time: 21:09
  */
 public class VolumeCalculatorTest {
     private static class Item {
-        private int[] flasks;
+        private int[] hills;
         private int volume;
 
-        public Item(int[] flasks, int volume) {
-            this.flasks = flasks;
+        public Item(int[] hills, int volume) {
+            this.hills = hills;
             this.volume = volume;
         }
 
-        public int[] getFlasks() {
-            return flasks;
+        public int[] getHills() {
+            return hills;
         }
 
         public int getVolume() {
@@ -32,7 +32,7 @@ public class VolumeCalculatorTest {
         @Override
         public String toString() {
             return "Item{" +
-                    "flasks=" + Arrays.toString(flasks) +
+                    "hills=" + Arrays.toString(hills) +
                     ", volume=" + volume +
                     '}';
         }
@@ -66,13 +66,13 @@ public class VolumeCalculatorTest {
     @Test
     public void calculateFullTest() {
         Arrays.stream(items).forEach(
-                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), VolumeCalculator.calculate(item.getFlasks()))
+                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), VolumeCalculator.calculate(item.getHills()))
         );
     }
 
     @Ignore
     @Test
     public void calculatePartTest() {
-        Assert.assertEquals("Failed: " + items[0], items[0].getVolume(), VolumeCalculator.calculate(items[0].getFlasks()));
+        Assert.assertEquals("Failed: " + items[0], items[0].getVolume(), VolumeCalculator.calculate(items[0].getHills()));
     }
 }

@@ -3,23 +3,23 @@ package com.rush.rainyhills;
 /**
  * Created by Ruslan Khalikov
  * Date: 14.06.2016
- * Time: 14:19
+ * Time: 20:19
  */
 public abstract class VolumeCalculator {
 
-    public static int calculate(int[] flasks) {
+    public static int calculate(int[] hills) {
         int volume = 0;
 
         int indexL = 0;
-        int indexR = flasks.length - 1;
-        int maxL = flasks[indexL];
-        int maxR = flasks[indexR];
+        int indexR = hills.length - 1;
+        int maxL = hills[indexL];
+        int maxR = hills[indexR];
 
         while (indexL < indexR) {
-            if (flasks[indexL] > maxL) maxL = flasks[indexL];
-            if (flasks[indexR] > maxR) maxR = flasks[indexR];
+            if (hills[indexL] > maxL) maxL = hills[indexL];
+            if (hills[indexR] > maxR) maxR = hills[indexR];
 
-            volume += maxL < maxR ? maxL - flasks[indexL++] : maxR - flasks[indexR--];
+            volume += maxL < maxR ? maxL - hills[indexL++] : maxR - hills[indexR--];
         }
 
         return volume;
