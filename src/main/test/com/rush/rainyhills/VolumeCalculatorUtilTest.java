@@ -1,5 +1,6 @@
 package com.rush.rainyhills;
 
+import com.rush.rainyhills.util.VolumeCalculatorUtil;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import java.util.Arrays;
  * Date: 14.06.2016
  * Time: 21:09
  */
-public class VolumeCalculatorTest {
+public class VolumeCalculatorUtilTest {
     private static class Item {
         private int[] hills;
         private int volume;
@@ -66,13 +67,13 @@ public class VolumeCalculatorTest {
     @Test
     public void calculateFullTest() {
         Arrays.stream(items).forEach(
-                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), VolumeCalculator.calculate(item.getHills()))
+                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), VolumeCalculatorUtil.calculate(item.getHills()))
         );
     }
 
     @Ignore
     @Test
     public void calculatePartTest() {
-        Assert.assertEquals("Failed: " + items[0], items[0].getVolume(), VolumeCalculator.calculate(items[0].getHills()));
+        Assert.assertEquals("Failed: " + items[0], items[0].getVolume(), VolumeCalculatorUtil.calculate(items[0].getHills()));
     }
 }

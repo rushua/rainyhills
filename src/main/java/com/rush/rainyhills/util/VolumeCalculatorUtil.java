@@ -1,11 +1,11 @@
-package com.rush.rainyhills;
+package com.rush.rainyhills.util;
 
 /**
  * Created by Ruslan Khalikov
  * Date: 14.06.2016
  * Time: 20:19
  */
-public abstract class VolumeCalculator {
+public abstract class VolumeCalculatorUtil {
 
     public static int calculate(int[] hills) {
         int volume = 0;
