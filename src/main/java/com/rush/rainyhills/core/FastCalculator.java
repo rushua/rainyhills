@@ -1,13 +1,13 @@
-package com.rush.rainyhills.util;
+package com.rush.rainyhills.core;
 
 /**
  * Created by Ruslan Khalikov
  * Date: 14.06.2016
  * Time: 20:19
  */
-public abstract class VolumeCalculatorUtil {
-
-    public static int calculate(int[] hills) {
+public class FastCalculator implements IVolumeCalculator {
+    @Override
+    public int calculate(int[] hills) {
         int volume = 0;
 
         int indexL = 0;

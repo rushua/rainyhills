@@ -1,11 +1,11 @@
-package com.rush.rainyhills.ejb;
+package com.rush.rainyhills.core;
 
 /**
  * Created by Ruslan Khalikov
  * Date: 14.06.2016
- * Time: 20:48
+ * Time: 22:51
  */
 public interface IVolumeCalculator {
 
-    public int getVolume(int[] hills);
+    public int calculate(int[] hills);
 }

@@ -5,10 +5,10 @@
     <artifactId>rainyhills</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>rainyhills</name>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
     <build>
-        <finalName>rainyhills-java</finalName>
+        <finalName>rainyhills</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
@@ -35,6 +35,7 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
