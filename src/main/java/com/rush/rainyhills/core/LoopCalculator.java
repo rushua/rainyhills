@@ -10,16 +10,16 @@ public class LoopCalculator implements IVolumeCalculator {
     public int calculate(int[] hills) {
         int volume = 0;
 
-        int maxL = 0;
-        int maxR = 0;
-        int indexL = 0;
-        int indexR = hills.length - 1;
+        int maxLeft = 0;
+        int maxRight = 0;
+        int indexLeft = 0;
+        int indexRight = hills.length - 1;
 
-        while (indexL < indexR) {
-            if (hills[indexL] > maxL) maxL = hills[indexL];
-            if (hills[indexR] > maxR) maxR = hills[indexR];
+        while (indexLeft < indexRight) {
+            if (hills[indexLeft] > maxLeft) maxLeft = hills[indexLeft];
+            if (hills[indexRight] > maxRight) maxRight = hills[indexRight];
 
-            volume += maxL < maxR ? maxL - hills[indexL++] : maxR - hills[indexR--];
+            volume += maxLeft < maxRight ? maxLeft - hills[indexLeft++] : maxRight - hills[indexRight--];
         }
 
         return volume;
