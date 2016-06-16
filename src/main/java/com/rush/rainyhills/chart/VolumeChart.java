@@ -73,14 +73,9 @@ public class VolumeChart {
         XYItemRenderer renderer = new XYBarRenderer();
         renderer.setSeriesVisibleInLegend(0, false);
         renderer.setSeriesVisibleInLegend(1, false);
-//        renderer.setSeriesPaint(0, Color.RED);
-//        renderer.setSeriesPaint(1, Color.BLUE);
-        GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, Color.BLUE,
-                0.0f, 0.0f, new Color(0, 0, 64));
-        GradientPaint gp1 = new GradientPaint(0.0f, 0.0f, Color.RED,
-                0.0f, 0.0f, new Color(64, 0, 0));
-        renderer.setSeriesPaint(0, gp0);
-        renderer.setSeriesPaint(1, gp1);
+
+        renderer.setSeriesPaint(0, new GradientPaint(0.0f, 0.0f, new Color(150, 75, 0), 0.0f, 0.0f, new Color(75, 0, 0)));
+        renderer.setSeriesPaint(1, new GradientPaint(0.0f, 0.0f, new Color(0, 0, 255), 0.0f, 0.0f, new Color(0, 0, 64)));
         plot.setRenderer(renderer);
     }
 }

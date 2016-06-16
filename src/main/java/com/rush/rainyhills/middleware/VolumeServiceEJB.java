@@ -1,6 +1,6 @@
 package com.rush.rainyhills.middleware;
 
-import com.rush.rainyhills.core.FastCalculator;
+import com.rush.rainyhills.core.LoopCalculator;
 import com.rush.rainyhills.core.VolumeCalculator;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +20,7 @@ public class VolumeServiceEJB implements IVolumeService {
 
     @PostConstruct
     public void init() {
-        volumeCalculator.setVolumeCalculator(new FastCalculator());
+        volumeCalculator.setVolumeCalculator(new LoopCalculator());
     }
 
     @Override

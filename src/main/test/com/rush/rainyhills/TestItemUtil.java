@@ -9,6 +9,17 @@ import java.util.Arrays;
  */
 public abstract class TestItemUtil {
     private static TestItem[] testItems = new TestItem[]{
+            new TestItem(new int[]{}, 0),
+            new TestItem(new int[]{1}, 0),
+            new TestItem(new int[]{1, 2}, 0),
+            new TestItem(new int[]{2, 1}, 0),
+            new TestItem(new int[]{2, 1, 2}, 1),
+            new TestItem(new int[]{1, 2, 1}, 0),
+            new TestItem(new int[]{3, 1, 2}, 1),
+            new TestItem(new int[]{2, 1, 3}, 1),
+            new TestItem(new int[]{2, 2, 2}, 0),
+            new TestItem(new int[]{2, 2, 3}, 0),
+            new TestItem(new int[]{3, 2, 2}, 0),
             new TestItem(new int[]{3, 4, 7, 3, 4, 7, 6, 7, 2, 4}, 10),
             new TestItem(new int[]{6, 1, 5, 2, 1, 4}, 9),
             new TestItem(new int[]{5, 1, 3, 6, 1, 6, 1, 3, 1, 4}, 18),
@@ -27,6 +38,7 @@ public abstract class TestItemUtil {
             new TestItem(new int[]{5, 1, 3, 6, 1, 5, 1, 7, 6, 5}, 17),
             new TestItem(new int[]{0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1}, 1),
             new TestItem(new int[]{2, 5, 1, 2, 3, 4, 7, 7, 6}, 10),
+            new TestItem(new int[]{6, 7, 7, 4, 3, 2, 1, 5, 2}, 10),
             new TestItem(new int[]{5, 1, 4, 2, 3}, 4),
             new TestItem(new int[]{7, 1, 5, 2, 1, 4, 3, 2}, 9),
             new TestItem(new int[]{1, 5, 1, 5, 1, 5, 1}, 8),

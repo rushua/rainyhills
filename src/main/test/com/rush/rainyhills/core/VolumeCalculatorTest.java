@@ -22,7 +22,7 @@ public class VolumeCalculatorTest {
     public void init() {
         items = TestItemUtil.createTestItems();
         volumeCalculator = new VolumeCalculator();
-        volumeCalculator.setVolumeCalculator(new FastCalculator());
+        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
     }
 
     @Test
@@ -35,6 +35,7 @@ public class VolumeCalculatorTest {
     @Ignore
     @Test
     public void partCalculateTest() {
-        Assert.assertEquals("Failed: " + items[0], items[0].getVolume(), volumeCalculator.calculate(items[0].getHills()));
+        TestItemUtil.TestItem item = items[28];
+        Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getHills()));
     }
 }

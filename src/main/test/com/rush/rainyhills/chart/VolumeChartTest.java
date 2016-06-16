@@ -19,7 +19,7 @@ public class VolumeChartTest {
     @Test
     public void createSVG() {
         try {
-            VolumeChart volumeChart = new VolumeChart(new int[]{0, 1, 2, 3, 4}, new int[]{5, 4, 3, 2, 1});
+            VolumeChart volumeChart = new VolumeChart(new int[]{2, 5, 1, 2, 3, 4, 7, 7, 6}, new int[]{});
             File file = new File("C:\\volumeChar.svg");
             SVGUtils.writeToSVG(file, volumeChart.getSVGElement());
         } catch (IOException e) {
