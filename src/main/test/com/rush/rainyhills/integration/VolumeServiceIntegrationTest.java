@@ -73,7 +73,8 @@ public class VolumeServiceIntegrationTest {
         );
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void fullIntegrationTest() {
         try {
             System.out.println("Start integration test...");
             VolumeServiceIntegrationTest test = new VolumeServiceIntegrationTest();
@@ -82,8 +83,7 @@ public class VolumeServiceIntegrationTest {
             test.fullChartIntegrationTest();
             System.out.println("Done!");
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Failed!!!");
+            Assert.fail(e.getMessage());
         }
     }
 }
