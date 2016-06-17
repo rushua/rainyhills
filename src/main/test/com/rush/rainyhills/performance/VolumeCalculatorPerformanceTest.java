@@ -30,7 +30,7 @@ public class VolumeCalculatorPerformanceTest {
         TestItemUtil.TestItem item = new TestItemUtil.TestItem(hills, hills, 0);
 
         List<TestItemUtil.TestItem> itemList = new ArrayList<>();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 5000; i++) {
             itemList.add(item);
         }
         items = new TestItemUtil.TestItem[itemList.size()];
@@ -60,7 +60,7 @@ public class VolumeCalculatorPerformanceTest {
     @Test
     public void fullPerformanceTest() {
         System.out.println("Preparing...");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             loopPerformanceTest();
             recursionPerformanceTest();
         }
