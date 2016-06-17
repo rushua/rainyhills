@@ -59,9 +59,11 @@ public class VolumeCalculatorPerformanceTest {
 
     @Test
     public void fullPerformanceTest() {
+        System.out.println("Preparing...");
         for (int i = 0; i < 10; i++) {
             loopPerformanceTest();
             recursionPerformanceTest();
         }
+        System.out.println("Done!");
     }
 }
