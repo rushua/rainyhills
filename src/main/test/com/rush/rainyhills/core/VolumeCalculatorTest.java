@@ -14,7 +14,6 @@ import java.util.Arrays;
  * Time: 21:09
  */
 public class VolumeCalculatorTest {
-
     private TestItemUtil.TestItem[] items;
     private VolumeCalculator volumeCalculator;
 

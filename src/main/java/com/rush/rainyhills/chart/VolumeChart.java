@@ -21,27 +21,43 @@ import java.awt.*;
  * Time: 23:50
  */
 public class VolumeChart {
+    private static final Color BROWN = new Color(150, 75, 0);
+    private static final Color BROWN_DARK = new Color(75, 0, 0);
+    private static final Color BLUE = new Color(0, 0, 255);
+    private static final Color BLUE_DARK = new Color(0, 0, 64);
+    private static final Point CHAR_SIZE = new Point(1000, 700);
+    private static final String TITLE = "VOLUME";
+
     private JFreeChart volumeChart;
+
+    public VolumeChart(int[] emptyHills) {
+        this(emptyHills, new int[]{});
+    }
 
     public VolumeChart(int[] emptyHills, int[] fullHills) {
         volumeChart = ChartFactory.createHistogram(
-                "Volume = " + buildVolume(emptyHills, fullHills), "Hill", "High", buildDataset(emptyHills, fullHills),
+                fullHills.length == 0 ? "" : TITLE + " = " + buildVolume(emptyHills, fullHills),
+                "HILL", "HIGH", buildDataset(emptyHills, fullHills),
                 PlotOrientation.VERTICAL, false, false, false);
         initChart();
     }
 
     public String getSVGDocument() {
-        SVGGraphics2D svgGraphics2D = new SVGGraphics2D(1000, 700);
-        Rectangle rectangle = new Rectangle(0, 0, 1000, 700);
+        SVGGraphics2D svgGraphics2D = new SVGGraphics2D(CHAR_SIZE.x, CHAR_SIZE.y);
+        Rectangle rectangle = new Rectangle(0, 0, CHAR_SIZE.x, CHAR_SIZE.y);
         volumeChart.draw(svgGraphics2D, rectangle);
         return svgGraphics2D.getSVGDocument();
     }
 
     public String getSVGElement() {
-        SVGGraphics2D svgGraphics2D = new SVGGraphics2D(1000, 700);
-        Rectangle rectangle = new Rectangle(0, 0, 1000, 700);
+        SVGGraphics2D svgGraphics2D = new SVGGraphics2D(CHAR_SIZE.x, CHAR_SIZE.y);
+        Rectangle rectangle = new Rectangle(0, 0, CHAR_SIZE.x, CHAR_SIZE.y);
         volumeChart.draw(svgGraphics2D, rectangle);
         return svgGraphics2D.getSVGElement();
+    }
+
+    public String getVolume() {
+        return volumeChart.getTitle().getText().replaceAll(TITLE + " = ", "");
     }
 
     private IntervalXYDataset buildDataset(int[] emptyHills, int[] fullHills) {
@@ -82,8 +98,8 @@ public class VolumeChart {
         renderer.setSeriesVisibleInLegend(0, false);
         renderer.setSeriesVisibleInLegend(1, false);
 
-        renderer.setSeriesPaint(0, new GradientPaint(0.0f, 0.0f, new Color(150, 75, 0), 0.0f, 0.0f, new Color(75, 0, 0)));
-        renderer.setSeriesPaint(1, new GradientPaint(0.0f, 0.0f, new Color(0, 0, 255), 0.0f, 0.0f, new Color(0, 0, 64)));
+        renderer.setSeriesPaint(0, new GradientPaint(0.0f, 0.0f, BROWN, 0.0f, 0.0f, BROWN_DARK));
+        renderer.setSeriesPaint(1, new GradientPaint(0.0f, 0.0f, BLUE, 0.0f, 0.0f, BLUE_DARK));
         plot.setRenderer(renderer);
     }
 }
