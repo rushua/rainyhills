@@ -77,10 +77,8 @@ public class VolumeServiceIntegrationTest {
     public void fullIntegrationTest() {
         try {
             System.out.println("Start integration test...");
-            VolumeServiceIntegrationTest test = new VolumeServiceIntegrationTest();
-            test.init();
-            test.fullVolumeIntegrationTest();
-            test.fullChartIntegrationTest();
+            fullVolumeIntegrationTest();
+            fullChartIntegrationTest();
             System.out.println("Done!");
         } catch (Exception e) {
             Assert.fail(e.getMessage());
