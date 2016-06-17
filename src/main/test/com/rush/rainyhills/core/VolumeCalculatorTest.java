@@ -22,20 +22,53 @@ public class VolumeCalculatorTest {
     public void init() {
         items = TestItemUtil.createTestItems();
         volumeCalculator = new VolumeCalculator();
-        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
     }
 
     @Test
-    public void fullCalculateTest() {
+    public void fullLoopCalculateTest() {
+        volumeCalculator.setVolumeCalculator(new LoopCalculator());
         Arrays.stream(items).forEach(
-                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getHills()))
+                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getEmptyHills()))
+        );
+    }
+
+    @Test
+    public void fullRecursionCalculateTest() {
+        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+        Arrays.stream(items).forEach(
+                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getEmptyHills()))
+        );
+    }
+
+    @Test
+    public void fullLoopHillCalculateTest() {
+        volumeCalculator.setVolumeCalculator(new LoopCalculator());
+        Arrays.stream(items).forEach(
+                item -> Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), volumeCalculator.calculateHills(item.getEmptyHills()))
+        );
+    }
+
+    @Test
+    public void fullRecursionHillCalculateTest() {
+        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+        Arrays.stream(items).forEach(
+                item -> Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), volumeCalculator.calculateHills(item.getEmptyHills()))
         );
     }
 
     @Ignore
     @Test
     public void partCalculateTest() {
+        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
         TestItemUtil.TestItem item = items[28];
-        Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getHills()));
+        Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getEmptyHills()));
+    }
+
+    @Ignore
+    @Test
+    public void partHillCalculateTest() {
+        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+        TestItemUtil.TestItem item = items[28];
+        Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), volumeCalculator.calculateHills(item.getEmptyHills()));
     }
 }

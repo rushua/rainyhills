@@ -6,7 +6,7 @@ import com.rush.rainyhills.middleware.IVolumeService;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * Created by Ruslan Khalikov
@@ -22,13 +22,15 @@ public class VolumeServiceREST {
 
     @Path("/volume")
     @GET
-    public Integer getVolume(@QueryParam("hill") List<Integer> hillList) {
-        return volumeService.getVolume(hillList);
+    public Integer getVolume(@QueryParam("hills") String hills) {
+        int[] emptyHills = Arrays.stream(hills.trim().split(",")).mapToInt(Integer::valueOf).toArray();
+        return volumeService.getVolume(emptyHills);
     }
 
-    @Path("/svg")
+    @Path("/chart")
     @GET
-    public String getSVG(@QueryParam("hill") List<Integer> hillList) {
-        return new VolumeChart(new int[]{0, 1, 2, 3, 4}, new int[]{5, 4, 3, 2, 1}).getSVGDocument();
+    public String getChart(@QueryParam("hills") String hills) {
+        int[] emptyHills = Arrays.stream(hills.trim().split(",")).mapToInt(Integer::valueOf).toArray();
+        return new VolumeChart(emptyHills, volumeService.getFullHills(emptyHills)).getSVGDocument();
     }
 }

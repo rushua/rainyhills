@@ -25,7 +25,7 @@ public class VolumeChart {
 
     public VolumeChart(int[] emptyHills, int[] fullHills) {
         volumeChart = ChartFactory.createHistogram(
-                "Volume", "Hill", "High", buildDataset(emptyHills, fullHills),
+                "Volume = " + buildVolume(emptyHills, fullHills), "Hill", "High", buildDataset(emptyHills, fullHills),
                 PlotOrientation.VERTICAL, false, false, false);
         initChart();
     }
@@ -58,6 +58,14 @@ public class VolumeChart {
         dataset.addSeries(emptySeries);
         dataset.addSeries(fullSeries);
         return dataset;
+    }
+
+    private int buildVolume(int[] emptyHills, int[] fullHills) {
+        int volume = 0;
+        for (int i = 0; i < emptyHills.length; i++) {
+            volume += fullHills[i] - emptyHills[i];
+        }
+        return volume;
     }
 
     private void initChart() {

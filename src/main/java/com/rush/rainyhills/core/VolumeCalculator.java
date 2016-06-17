@@ -17,7 +17,12 @@ public class VolumeCalculator implements IVolumeCalculator {
     }
 
     @Override
-    public int calculate(int[] hills) {
-        return volumeCalculator.calculate(hills);
+    public int calculate(int[] emptyHills) {
+        return volumeCalculator.calculate(emptyHills);
+    }
+
+    @Override
+    public int[] calculateHills(int[] emptyHills) {
+        return volumeCalculator.calculateHills(emptyHills);
     }
 }

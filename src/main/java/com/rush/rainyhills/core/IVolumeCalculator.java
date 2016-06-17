@@ -7,5 +7,7 @@ package com.rush.rainyhills.core;
  */
 public interface IVolumeCalculator {
 
-    public int calculate(int[] hills);
+    public int calculate(int[] emptyHills);
+
+    public int[] calculateHills(int[] emptyHills);
 }

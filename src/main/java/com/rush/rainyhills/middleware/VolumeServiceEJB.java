@@ -24,8 +24,12 @@ public class VolumeServiceEJB implements IVolumeService {
     }
 
     @Override
-    public Integer getVolume(List<Integer> hillList) {
-        int[] hills = hillList.stream().mapToInt(hill -> hill).toArray();
-        return volumeCalculator.calculate(hills);
+    public int getVolume(int[] emptyHill) {
+        return volumeCalculator.calculate(emptyHill);
+    }
+
+    @Override
+    public int[] getFullHills(int[] emptyHills) {
+        return volumeCalculator.calculateHills(emptyHills);
     }
 }

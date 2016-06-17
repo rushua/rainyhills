@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface IVolumeService {
 
-    public Integer getVolume(List<Integer> hillList);
+    public int getVolume(int[] emptyHills);
+
+    public int[] getFullHills(int[] emptyHills);
 }

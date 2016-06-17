@@ -7,8 +7,16 @@ package com.rush.rainyhills.core;
  */
 public class RecursionCalculator implements IVolumeCalculator {
     @Override
-    public int calculate(int[] hills) {
-        return calculate(hills, 0);
+    public int calculate(int[] emptyHills) {
+        return calculate(emptyHills, 0);
+    }
+
+    @Override
+    public int[] calculateHills(int[] emptyHills) {
+        int[] fullHills = new int[emptyHills.length];
+        System.arraycopy(emptyHills, 0, fullHills, 0, emptyHills.length);
+        calculateHills(emptyHills, fullHills, 0);
+        return fullHills;
     }
 
     private int calculate(int[] hills, int startIndex) {
@@ -35,12 +43,35 @@ public class RecursionCalculator implements IVolumeCalculator {
         return volume;
     }
 
-    private int findMaxIndex(int[] hills, int startIndex) {
+    private int[] calculateHills(int[] emptyHills, int[] fullHills, int startIndex) {
+        if (startIndex < emptyHills.length) {
+            int maxHill = emptyHills[startIndex];
+
+            startIndex++;
+            int endIndex = findMaxIndex(emptyHills, startIndex);
+            if (endIndex < emptyHills.length) {
+                maxHill = maxHill < emptyHills[endIndex] ? maxHill : emptyHills[endIndex];
+                for (int i = startIndex; i < endIndex; i++) {
+                    if (emptyHills[i] > maxHill) {
+                        maxHill = emptyHills[i];
+                    } else {
+                        fullHills[i] = maxHill;
+                    }
+                }
+
+                startIndex = endIndex;
+                calculateHills(emptyHills, fullHills, startIndex);
+            }
+        }
+        return fullHills;
+    }
+
+    private int findMaxIndex(int[] emptyHills, int startIndex) {
         int maxHill = 0;
         int maxIndex = startIndex;
-        for (int i = startIndex; i < hills.length; i++) {
-            if (hills[i] > maxHill) {
-                maxHill = hills[i];
+        for (int i = startIndex; i < emptyHills.length; i++) {
+            if (emptyHills[i] > maxHill) {
+                maxHill = emptyHills[i];
                 maxIndex = i;
             }
         }
