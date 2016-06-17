@@ -1,12 +1,11 @@
 package com.rush.rainyhills.middleware;
 
-import com.rush.rainyhills.core.LoopCalculator;
+import com.rush.rainyhills.core.RecursionCalculator;
 import com.rush.rainyhills.core.VolumeCalculator;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.util.List;
 
 /**
  * Created by Ruslan Khalikov
@@ -20,7 +19,7 @@ public class VolumeServiceEJB implements IVolumeService {
 
     @PostConstruct
     public void init() {
-        volumeCalculator.setVolumeCalculator(new LoopCalculator());
+        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
     }
 
     @Override

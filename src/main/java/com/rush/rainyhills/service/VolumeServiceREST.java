@@ -8,9 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-import static com.rush.rainyhills.service.VolumeServiceUtil.isArray;
-import static com.rush.rainyhills.service.VolumeServiceUtil.isPositive;
-import static com.rush.rainyhills.service.VolumeServiceUtil.parse;
+import static com.rush.rainyhills.service.VolumeServiceUtil.*;
 
 /**
  * Created by Ruslan Khalikov

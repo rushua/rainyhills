@@ -1,7 +1,9 @@
 package com.rush.rainyhills.chart;
 
+import com.rush.rainyhills.TestItemUtil;
 import org.jfree.graphics2d.svg.SVGUtils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -12,11 +14,18 @@ import java.io.File;
  * Time: 0:27
  */
 public class VolumeChartTest {
+    TestItemUtil.TestItem item;
+
+    @Before
+    public void init() {
+        item = TestItemUtil.createTestItems()[28];
+    }
 
     @Test
     public void createEmptySVG() {
         try {
-            VolumeChart volumeChart = new VolumeChart(new int[]{2, 5, 1, 2, 3, 4, 7, 7, 6});
+            VolumeChart volumeChart = new VolumeChart(item.getEmptyHills());
+            Assert.assertEquals("", volumeChart.getVolume());
             File file = File.createTempFile("chart", ".svg");
             SVGUtils.writeToSVG(file, volumeChart.getSVGElement());
             file.deleteOnExit();
@@ -29,8 +38,9 @@ public class VolumeChartTest {
     public void createFullSVG() {
         try {
             VolumeChart volumeChart = new VolumeChart(
-                    new int[]{2, 5, 1, 2, 3, 4, 7, 7, 6},
-                    new int[]{2, 5, 5, 5, 5, 5, 7, 7, 6});
+                    item.getEmptyHills(),
+                    item.getFullHills());
+            Assert.assertEquals(String.valueOf(item.getVolume()), volumeChart.getVolume());
             File file = File.createTempFile("chart", ".svg");
             SVGUtils.writeToSVG(file, volumeChart.getSVGElement());
             file.deleteOnExit();

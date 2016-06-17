@@ -31,12 +31,15 @@ public class VolumeChart {
     private JFreeChart volumeChart;
 
     public VolumeChart(int[] emptyHills) {
-        this(emptyHills, new int[]{});
+        volumeChart = ChartFactory.createHistogram(
+                "", "HILL", "HIGH", buildDataset(emptyHills, new int[]{}),
+                PlotOrientation.VERTICAL, false, false, false);
+        initChart();
     }
 
     public VolumeChart(int[] emptyHills, int[] fullHills) {
         volumeChart = ChartFactory.createHistogram(
-                fullHills.length == 0 ? "" : TITLE + " = " + buildVolume(emptyHills, fullHills),
+                TITLE + " = " + buildVolume(emptyHills, fullHills),
                 "HILL", "HIGH", buildDataset(emptyHills, fullHills),
                 PlotOrientation.VERTICAL, false, false, false);
         initChart();

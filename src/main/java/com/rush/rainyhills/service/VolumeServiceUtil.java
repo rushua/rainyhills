@@ -16,7 +16,7 @@ public abstract class VolumeServiceUtil {
         Matcher matcher = arrayPattern.matcher(hills);
         if (matcher.matches()) {
             return Arrays
-                    .stream(matcher.group(1).trim().split(","))
+                    .stream(matcher.group(1).split(","))
                     .filter(hill -> !hill.isEmpty())
                     .mapToInt(Integer::valueOf).toArray();
         }
