@@ -73,6 +73,7 @@ public class VolumeServiceIntegrationTest {
         );
     }
 
+    @Ignore
     @Test
     public void fullIntegrationTest() {
         try {
