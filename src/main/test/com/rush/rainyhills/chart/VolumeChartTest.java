@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.io.File;
 
+import static com.rush.rainyhills.TestItemUtil.volumes;
+
 /**
  * Created by Ruslan Khalikov
  * Date: 16.06.2016
@@ -39,7 +41,7 @@ public class VolumeChartTest {
         try {
             VolumeChart volumeChart = new VolumeChart(
                     item.getEmptyHills(),
-                    item.getFullHills());
+                    volumes(item.getEmptyHills(), item.getFullHills()));
             Assert.assertEquals(String.valueOf(item.getVolume()), volumeChart.getVolume());
             File file = File.createTempFile("chart", ".svg");
             SVGUtils.writeToSVG(file, volumeChart.getSVGElement());

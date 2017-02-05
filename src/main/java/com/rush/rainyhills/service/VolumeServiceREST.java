@@ -28,9 +28,9 @@ public class VolumeServiceREST {
     public Response getVolume(@QueryParam("hills") String hills) {
         try {
             if (isArray(hills)) {
-                int[] emptyHills = parse(hills);
-                if (isPositive(emptyHills)) {
-                    int volume = volumeService.getVolume(emptyHills);
+                int[] hillArray = parse(hills);
+                if (isPositive(hillArray)) {
+                    int volume = volumeService.getVolume(hillArray);
                     return Response.ok(VOLUME + " = " + volume).header(VOLUME, volume).build();
                 }
             }
@@ -45,10 +45,10 @@ public class VolumeServiceREST {
     public Response getChart(@QueryParam("hills") String hills) {
         try {
             if (isArray(hills)) {
-                int[] emptyHills = parse(hills);
-                if (isPositive(emptyHills)) {
-                    int[] fullHills = volumeService.getFullHills(emptyHills);
-                    VolumeChart volumeChart = new VolumeChart(emptyHills, fullHills);
+                int[] hillArray = parse(hills);
+                if (isPositive(hillArray)) {
+                    int[] volumes = volumeService.getVolumes(hillArray);
+                    VolumeChart volumeChart = new VolumeChart(hillArray, volumes);
                     return Response.ok(volumeChart.getSVGDocument()).header(VOLUME, volumeChart.getVolume()).build();
                 }
             }

@@ -6,7 +6,7 @@
     <display-name>rainyhills</display-name>
 
     <servlet>
-       <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>

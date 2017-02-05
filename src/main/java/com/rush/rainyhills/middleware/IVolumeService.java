@@ -1,7 +1,5 @@
 package com.rush.rainyhills.middleware;
 
-import java.util.List;
-
 /**
  * Created by Ruslan Khalikov
  * Date: 14.06.2016
@@ -11,5 +9,5 @@ public interface IVolumeService {
 
     public int getVolume(int[] emptyHills);
 
-    public int[] getFullHills(int[] emptyHills);
+    public int[] getVolumes(int[] emptyHills);
 }

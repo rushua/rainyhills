@@ -1,7 +1,6 @@
 package com.rush.rainyhills.integration;
 
 import com.rush.rainyhills.TestItemUtil;
-import com.rush.rainyhills.core.VolumeCalculator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -21,14 +20,12 @@ public class VolumeServiceIntegrationTest {
     private static final String VOLUME = "VOLUME";
 
     private TestItemUtil.TestItem[] items;
-    private VolumeCalculator volumeCalculator;
     private Client serviceClient;
     private String baseUrl;
 
     @Before
     public void init() {
         items = TestItemUtil.createTestItems();
-        volumeCalculator = new VolumeCalculator();
         serviceClient = Client.create();
         baseUrl = "http://localhost:8080/rainyhills/";
     }

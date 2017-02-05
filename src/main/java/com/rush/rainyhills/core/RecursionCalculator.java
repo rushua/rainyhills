@@ -5,67 +5,39 @@ package com.rush.rainyhills.core;
  * Date: 16.06.2016
  * Time: 20:06
  */
-public class RecursionCalculator implements IVolumeCalculator {
+public class RecursionCalculator extends VolumeCalculator {
     @Override
-    public int calculate(int[] emptyHills) {
-        return calculate(0, maxHillIndex(1, emptyHills), emptyHills);
+    public int[] calculateArray(int[] hills) {
+        int[] volumes = new int[hills.length];
+        return calculateArray(0, hills, volumes);
     }
 
-    @Override
-    public int[] calculateHills(int[] emptyHills) {
-        int[] fullHills = new int[emptyHills.length];
-        System.arraycopy(emptyHills, 0, fullHills, 0, emptyHills.length);
-        calculateHills(0, maxHillIndex(1, emptyHills), emptyHills, fullHills);
-        return fullHills;
-    }
+    private int[] calculateArray(int offset, int[] hills, int[] volumes) {
+        int end = maxHillIndex(offset + 1, hills);
+        if (end < hills.length) {
+            int blockHill = Math.min(hills[offset], hills[end]);
 
-    private int calculate(int startIndex, int endIndex, int[] emptyHills) {
-        int volume = 0;
-        if (endIndex < emptyHills.length) {
-            int blockHill = Math.min(emptyHills[startIndex], emptyHills[endIndex]);
-
-            startIndex = startIndex + 1;
-            for (int i = startIndex; i < endIndex; i++) {
-                if (emptyHills[i] > blockHill) {
-                    blockHill = emptyHills[i];
+            offset = offset + 1;
+            for (int i = offset; i < end; i++) {
+                if (hills[i] > blockHill) {
+                    blockHill = hills[i];
                 } else {
-                    volume += blockHill - emptyHills[i];
+                    volumes[i] = blockHill - hills[i];
                 }
             }
 
-            startIndex = endIndex;
-            endIndex = maxHillIndex(startIndex + 1, emptyHills);
-            volume += calculate(startIndex, endIndex, emptyHills);
+            offset = end;
+            volumes = calculateArray(offset, hills, volumes);
         }
-        return volume;
+        return volumes;
     }
 
-    private int[] calculateHills(int startIndex, int endIndex, int[] emptyHills, int[] fullHills) {
-        if (endIndex < emptyHills.length) {
-            int blockHill = Math.min(emptyHills[startIndex], emptyHills[endIndex]);
-
-            startIndex = startIndex + 1;
-            for (int i = startIndex; i < endIndex; i++) {
-                if (emptyHills[i] > blockHill) {
-                    blockHill = emptyHills[i];
-                } else {
-                    fullHills[i] = blockHill;
-                }
-            }
-
-            startIndex = endIndex;
-            endIndex = maxHillIndex(startIndex + 1, emptyHills);
-            calculateHills(startIndex, endIndex, emptyHills, fullHills);
-        }
-        return fullHills;
-    }
-
-    private int maxHillIndex(int startIndex, int[] emptyHills) {
+    private int maxHillIndex(int offset, int[] hills) {
         int maxHill = 0;
-        int maxHillIndex = startIndex;
-        for (int i = startIndex; i < emptyHills.length; i++) {
-            if (emptyHills[i] > maxHill) {
-                maxHill = emptyHills[i];
+        int maxHillIndex = offset;
+        for (int i = offset; i < hills.length; i++) {
+            if (hills[i] > maxHill) {
+                maxHill = hills[i];
                 maxHillIndex = i;
             }
         }

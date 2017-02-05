@@ -14,6 +14,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 
 import java.awt.*;
+import java.util.stream.IntStream;
 
 /**
  * Created by Ruslan Khalikov
@@ -30,17 +31,17 @@ public class VolumeChart {
 
     private JFreeChart volumeChart;
 
-    public VolumeChart(int[] emptyHills) {
+    public VolumeChart(int[] hills) {
         volumeChart = ChartFactory.createHistogram(
-                "", "HILL", "HIGH", buildDataset(emptyHills, new int[]{}),
+                "", "HILL", "HIGH", buildDataset(hills, new int[]{}),
                 PlotOrientation.VERTICAL, false, false, false);
         initChart();
     }
 
-    public VolumeChart(int[] emptyHills, int[] fullHills) {
+    public VolumeChart(int[] hills, int[] volumes) {
         volumeChart = ChartFactory.createHistogram(
-                TITLE + " = " + buildVolume(emptyHills, fullHills),
-                "HILL", "HIGH", buildDataset(emptyHills, fullHills),
+                TITLE + " = " + buildVolume(volumes),
+                "HILL", "HIGH", buildDataset(hills, volumes),
                 PlotOrientation.VERTICAL, false, false, false);
         initChart();
     }
@@ -63,14 +64,14 @@ public class VolumeChart {
         return volumeChart.getTitle().getText().replaceAll(TITLE + " = ", "");
     }
 
-    private IntervalXYDataset buildDataset(int[] emptyHills, int[] fullHills) {
+    private IntervalXYDataset buildDataset(int[] hills, int[] volumes) {
         XYSeries emptySeries = new XYSeries("empty");
-        for (int i = 0; i < emptyHills.length; i++) {
-            emptySeries.add(i, emptyHills[i]);
+        for (int i = 0; i < hills.length; i++) {
+            emptySeries.add(i, hills[i]);
         }
         XYSeries fullSeries = new XYSeries("full");
-        for (int i = 0; i < fullHills.length; i++) {
-            fullSeries.add(i, fullHills[i]);
+        for (int i = 0; i < volumes.length; i++) {
+            fullSeries.add(i, hills[i] + volumes[i]);
         }
 
         XYSeriesCollection dataset = new XYSeriesCollection();
@@ -79,12 +80,8 @@ public class VolumeChart {
         return dataset;
     }
 
-    private int buildVolume(int[] emptyHills, int[] fullHills) {
-        int volume = 0;
-        for (int i = 0; i < emptyHills.length; i++) {
-            volume += fullHills[i] - emptyHills[i];
-        }
-        return volume;
+    private int buildVolume(int[] volumes) {
+        return IntStream.of(volumes).sum();
     }
 
     private void initChart() {

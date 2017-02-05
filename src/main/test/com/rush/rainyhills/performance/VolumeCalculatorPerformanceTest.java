@@ -3,7 +3,7 @@ package com.rush.rainyhills.performance;
 import com.rush.rainyhills.TestItemUtil;
 import com.rush.rainyhills.core.LoopCalculator;
 import com.rush.rainyhills.core.RecursionCalculator;
-import com.rush.rainyhills.core.VolumeCalculator;
+import com.rush.rainyhills.middleware.WaterCalculator;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class VolumeCalculatorPerformanceTest {
     private TestItemUtil.TestItem[] items;
-    private VolumeCalculator volumeCalculator;
+    private WaterCalculator waterCalculator;
     private int itemCount = 1000;
 
     @Before
@@ -37,15 +37,15 @@ public class VolumeCalculatorPerformanceTest {
         items = new TestItemUtil.TestItem[itemList.size()];
         itemList.toArray(items);
 
-        volumeCalculator = new VolumeCalculator();
+        waterCalculator = new WaterCalculator();
     }
 
     @Ignore
     @Test
     public void loopPerformanceTest() {
-        volumeCalculator.setVolumeCalculator(new LoopCalculator());
+        waterCalculator.setVolumeCalculator(new LoopCalculator());
         long startTime = System.currentTimeMillis();
-        Arrays.stream(items).forEach(item -> volumeCalculator.calculate(item.getEmptyHills()));
+        Arrays.stream(items).forEach(item -> waterCalculator.calculate(item.getEmptyHills()));
         System.out.println("Loop calculator stream for " + items[0].getEmptyHills().length
                 + " item(s) -> " + (System.currentTimeMillis() - startTime) + " ms");
     }
@@ -53,9 +53,9 @@ public class VolumeCalculatorPerformanceTest {
     @Ignore
     @Test
     public void recursionPerformanceTest() {
-        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+        waterCalculator.setVolumeCalculator(new RecursionCalculator());
         long startTime = System.currentTimeMillis();
-        Arrays.stream(items).forEach(item -> volumeCalculator.calculate(item.getEmptyHills()));
+        Arrays.stream(items).forEach(item -> waterCalculator.calculate(item.getEmptyHills()));
         System.out.println("Recursion calculator stream for " + items[0].getEmptyHills().length
                 + " item(s) -> " + (System.currentTimeMillis() - startTime) + " ms");
     }

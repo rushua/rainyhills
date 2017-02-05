@@ -1,7 +1,6 @@
 package com.rush.rainyhills.middleware;
 
-import com.rush.rainyhills.core.RecursionCalculator;
-import com.rush.rainyhills.core.VolumeCalculator;
+import com.rush.rainyhills.core.LoopCalculator;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -15,20 +14,20 @@ import javax.inject.Inject;
 @Stateless
 public class VolumeServiceEJB implements IVolumeService {
     @Inject
-    private VolumeCalculator volumeCalculator;
+    private WaterCalculator waterCalculator;
 
     @PostConstruct
     public void init() {
-        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+        waterCalculator.setVolumeCalculator(new LoopCalculator());
     }
 
     @Override
-    public int getVolume(int[] emptyHill) {
-        return volumeCalculator.calculate(emptyHill);
+    public int getVolume(int[] hills) {
+        return waterCalculator.calculate(hills);
     }
 
     @Override
-    public int[] getFullHills(int[] emptyHills) {
-        return volumeCalculator.calculateHills(emptyHills);
+    public int[] getVolumes(int[] hills) {
+        return waterCalculator.calculateArray(hills);
     }
 }

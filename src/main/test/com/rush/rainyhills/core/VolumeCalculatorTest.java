@@ -1,12 +1,15 @@
 package com.rush.rainyhills.core;
 
 import com.rush.rainyhills.TestItemUtil;
+import com.rush.rainyhills.middleware.WaterCalculator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
+
+import static com.rush.rainyhills.TestItemUtil.fullHills;
 
 /**
  * Created by Ruslan Khalikov
@@ -15,59 +18,59 @@ import java.util.Arrays;
  */
 public class VolumeCalculatorTest {
     private TestItemUtil.TestItem[] items;
-    private VolumeCalculator volumeCalculator;
+    private WaterCalculator waterCalculator;
 
     @Before
     public void init() {
         items = TestItemUtil.createTestItems();
-        volumeCalculator = new VolumeCalculator();
+        waterCalculator = new WaterCalculator();
     }
 
     @Test
-    public void fullLoopCalculateTest() {
-        volumeCalculator.setVolumeCalculator(new LoopCalculator());
+    public void volumeLoopCalculateTest() {
+        waterCalculator.setVolumeCalculator(new LoopCalculator());
         Arrays.stream(items).forEach(
-                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getEmptyHills()))
+                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), waterCalculator.calculate(item.getEmptyHills()))
         );
     }
 
     @Test
-    public void fullRecursionCalculateTest() {
-        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+    public void volumeRecursionCalculateTest() {
+        waterCalculator.setVolumeCalculator(new RecursionCalculator());
         Arrays.stream(items).forEach(
-                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getEmptyHills()))
+                item -> Assert.assertEquals("Failed: " + item, item.getVolume(), waterCalculator.calculate(item.getEmptyHills()))
         );
     }
 
     @Test
-    public void fullLoopHillCalculateTest() {
-        volumeCalculator.setVolumeCalculator(new LoopCalculator());
+    public void arrayLoopCalculateTest() {
+        waterCalculator.setVolumeCalculator(new LoopCalculator());
         Arrays.stream(items).forEach(
-                item -> Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), volumeCalculator.calculateHills(item.getEmptyHills()))
+                item -> Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), fullHills(item.getEmptyHills(), waterCalculator.calculateArray(item.getEmptyHills())))
         );
     }
 
     @Test
-    public void fullRecursionHillCalculateTest() {
-        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+    public void arrayRecursionCalculateTest() {
+        waterCalculator.setVolumeCalculator(new RecursionCalculator());
         Arrays.stream(items).forEach(
-                item -> Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), volumeCalculator.calculateHills(item.getEmptyHills()))
+                item -> Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), fullHills(item.getEmptyHills(), waterCalculator.calculateArray(item.getEmptyHills())))
         );
     }
 
     @Ignore
     @Test
-    public void partCalculateTest() {
-        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+    public void partVolumeCalculateTest() {
+        waterCalculator.setVolumeCalculator(new RecursionCalculator());
         TestItemUtil.TestItem item = items[28];
-        Assert.assertEquals("Failed: " + item, item.getVolume(), volumeCalculator.calculate(item.getEmptyHills()));
+        Assert.assertEquals("Failed: " + item, item.getVolume(), waterCalculator.calculate(item.getEmptyHills()));
     }
 
     @Ignore
     @Test
-    public void partHillCalculateTest() {
-        volumeCalculator.setVolumeCalculator(new RecursionCalculator());
+    public void partArrayCalculateTest() {
+        waterCalculator.setVolumeCalculator(new RecursionCalculator());
         TestItemUtil.TestItem item = items[28];
-        Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), volumeCalculator.calculateHills(item.getEmptyHills()));
+        Assert.assertArrayEquals("Failed: " + item, item.getFullHills(), fullHills(item.getEmptyHills(), waterCalculator.calculateArray(item.getEmptyHills())));
     }
 }

@@ -5,44 +5,34 @@ package com.rush.rainyhills.core;
  * Date: 14.06.2016
  * Time: 20:19
  */
-public class LoopCalculator implements IVolumeCalculator {
+public class LoopCalculator extends VolumeCalculator {
     @Override
-    public int calculate(int[] emptyHills) {
-        int volume = 0;
+    public int[] calculateArray(int[] hills) {
+        int max = 0;
+        int index = 0;
+        int[] volumes = new int[hills.length];
 
         int maxLeft = 0;
         int maxRight = 0;
         int indexLeft = 0;
-        int indexRight = emptyHills.length - 1;
+        int indexRight = hills.length - 1;
 
         while (indexLeft < indexRight) {
-            if (emptyHills[indexLeft] > maxLeft) maxLeft = emptyHills[indexLeft];
-            if (emptyHills[indexRight] > maxRight) maxRight = emptyHills[indexRight];
+            if (hills[indexLeft] > maxLeft) maxLeft = hills[indexLeft];
+            if (hills[indexRight] > maxRight) maxRight = hills[indexRight];
 
-            volume += maxLeft < maxRight ? maxLeft - emptyHills[indexLeft++] : maxRight - emptyHills[indexRight--];
+
+            if (maxLeft < maxRight) {
+                max = maxLeft;
+                index = indexLeft++;
+            } else {
+                max = maxRight;
+                index = indexRight--;
+            }
+
+            volumes[index] = max - hills[index];
         }
 
-        return volume;
-    }
-
-    @Override
-    public int[] calculateHills(int[] emptyHills) {
-        int[] fullHills = new int[emptyHills.length];
-        System.arraycopy(emptyHills, 0, fullHills, 0, emptyHills.length);
-
-        int maxLeft = 0;
-        int maxRight = 0;
-        int indexLeft = 0;
-        int indexRight = emptyHills.length - 1;
-
-        while (indexLeft < indexRight) {
-            if (emptyHills[indexLeft] > maxLeft) maxLeft = emptyHills[indexLeft];
-            if (emptyHills[indexRight] > maxRight) maxRight = emptyHills[indexRight];
-
-            if (maxLeft < maxRight) fullHills[indexLeft++] = maxLeft;
-            else fullHills[indexRight--] = maxRight;
-        }
-
-        return fullHills;
+        return volumes;
     }
 }

@@ -83,4 +83,20 @@ public abstract class TestItemUtil {
         System.arraycopy(testItems, 0, items, 0, testItems.length);
         return items;
     }
+
+    public static int[] fullHills(int[] emptyHills, int[] volume) {
+        int[] fullHills = new int[emptyHills.length];
+        for (int i = 0; i < emptyHills.length; i++) {
+            fullHills[i] = emptyHills[i] + volume[i];
+        }
+        return fullHills;
+    }
+
+    public static int[] volumes(int[] emptyHills, int[] fullHills) {
+        int[] volumes = new int[emptyHills.length];
+        for (int i = 0; i < emptyHills.length; i++) {
+            volumes[i] = fullHills[i] - emptyHills[i];
+        }
+        return volumes;
+    }
 }
