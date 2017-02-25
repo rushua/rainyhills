@@ -45,8 +45,8 @@ public class VolumeCalculatorPerformanceTest {
     public void loopPerformanceTest() {
         waterCalculator.setVolumeCalculator(new LoopCalculator());
         long startTime = System.currentTimeMillis();
-        Arrays.stream(items).forEach(item -> waterCalculator.calculate(item.getEmptyHills()));
-        System.out.println("Loop calculator stream for " + items[0].getEmptyHills().length
+        Arrays.stream(items).forEach(item -> waterCalculator.calculate(item.getHills()));
+        System.out.println("Loop calculator stream for " + items[0].getHills().length
                 + " item(s) -> " + (System.currentTimeMillis() - startTime) + " ms");
     }
 
@@ -55,8 +55,8 @@ public class VolumeCalculatorPerformanceTest {
     public void recursionPerformanceTest() {
         waterCalculator.setVolumeCalculator(new RecursionCalculator());
         long startTime = System.currentTimeMillis();
-        Arrays.stream(items).forEach(item -> waterCalculator.calculate(item.getEmptyHills()));
-        System.out.println("Recursion calculator stream for " + items[0].getEmptyHills().length
+        Arrays.stream(items).forEach(item -> waterCalculator.calculate(item.getHills()));
+        System.out.println("Recursion calculator stream for " + items[0].getHills().length
                 + " item(s) -> " + (System.currentTimeMillis() - startTime) + " ms");
     }
 

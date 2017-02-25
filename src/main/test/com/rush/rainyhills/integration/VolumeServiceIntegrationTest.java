@@ -37,14 +37,14 @@ public class VolumeServiceIntegrationTest {
                 item -> {
                     System.out.println(item);
                     WebResource webResource = serviceClient.resource(baseUrl + "volume?hills="
-                            + Arrays.toString(item.getEmptyHills()).replaceAll(" ", ""));
+                            + Arrays.toString(item.getHills()).replaceAll(" ", ""));
 
                     ClientResponse response = webResource.get(ClientResponse.class);
                     if (response.getClientResponseStatus() != ClientResponse.Status.OK) {
                         Assert.fail(response.getClientResponseStatus() + " " + response.getEntity(String.class));
                     }
 
-                    Assert.assertEquals(String.valueOf(item.getVolume()), response.getHeaders().getFirst(VOLUME));
+                    Assert.assertEquals(String.valueOf(item.getTotal()), response.getHeaders().getFirst(VOLUME));
                     System.out.println("Server result = " + response.getHeaders().getFirst(VOLUME));
                 }
         );
@@ -57,14 +57,14 @@ public class VolumeServiceIntegrationTest {
                 item -> {
                     System.out.println(item);
                     WebResource webResource = serviceClient.resource(baseUrl + "chart?hills="
-                            + Arrays.toString(item.getEmptyHills()).replaceAll(" ", ""));
+                            + Arrays.toString(item.getHills()).replaceAll(" ", ""));
 
                     ClientResponse response = webResource.get(ClientResponse.class);
                     if (response.getClientResponseStatus() != ClientResponse.Status.OK) {
                         Assert.fail(response.getClientResponseStatus() + " " + response.getEntity(String.class));
                     }
 
-                    Assert.assertEquals(String.valueOf(item.getVolume()), response.getHeaders().getFirst(VOLUME));
+                    Assert.assertEquals(String.valueOf(item.getTotal()), response.getHeaders().getFirst(VOLUME));
                     System.out.println("Server result = " + response.getHeaders().getFirst(VOLUME));
                 }
         );

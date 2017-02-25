@@ -46,34 +46,34 @@ public abstract class TestItemUtil {
     };
 
     public static class TestItem {
-        private int[] emptyHills;
-        private int[] fullHills;
-        private int volume;
+        private int[] hills;
+        private int[] volumes;
+        private int total;
 
-        public TestItem(int[] emptyHills, int[] fullHills, int volume) {
-            this.emptyHills = emptyHills;
-            this.fullHills = fullHills;
-            this.volume = volume;
+        public TestItem(int[] hills, int[] volumes, int total) {
+            this.hills = hills;
+            this.volumes = volumes;
+            this.total = total;
         }
 
-        public int[] getEmptyHills() {
-            return emptyHills;
+        public int[] getHills() {
+            return hills;
         }
 
-        public int[] getFullHills() {
-            return fullHills;
+        public int[] getVolumes() {
+            return volumes;
         }
 
-        public int getVolume() {
-            return volume;
+        public int getTotal() {
+            return total;
         }
 
         @Override
         public String toString() {
             return "TestItem{" +
-                    "emptyHills=" + Arrays.toString(emptyHills) +
-                    ", fullHills=" + Arrays.toString(fullHills) +
-                    ", volume=" + volume +
+                    "hills=" + Arrays.toString(hills) +
+                    ", volumes=" + Arrays.toString(volumes) +
+                    ", total=" + total +
                     '}';
         }
     }
@@ -82,21 +82,5 @@ public abstract class TestItemUtil {
         TestItem[] items = new TestItem[testItems.length];
         System.arraycopy(testItems, 0, items, 0, testItems.length);
         return items;
-    }
-
-    public static int[] fullHills(int[] emptyHills, int[] volume) {
-        int[] fullHills = new int[emptyHills.length];
-        for (int i = 0; i < emptyHills.length; i++) {
-            fullHills[i] = emptyHills[i] + volume[i];
-        }
-        return fullHills;
-    }
-
-    public static int[] volumes(int[] emptyHills, int[] fullHills) {
-        int[] volumes = new int[emptyHills.length];
-        for (int i = 0; i < emptyHills.length; i++) {
-            volumes[i] = fullHills[i] - emptyHills[i];
-        }
-        return volumes;
     }
 }
