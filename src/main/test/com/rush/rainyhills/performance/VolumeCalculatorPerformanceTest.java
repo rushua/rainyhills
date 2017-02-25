@@ -1,8 +1,8 @@
 package com.rush.rainyhills.performance;
 
 import com.rush.rainyhills.TestItemUtil;
-import com.rush.rainyhills.core.LoopCalculator;
-import com.rush.rainyhills.core.RecursionCalculator;
+import com.rush.rainyhills.core.TwoWayLoopCalculator;
+import com.rush.rainyhills.core.OneWayLoopCalculator;
 import com.rush.rainyhills.middleware.WaterCalculator;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -38,8 +38,8 @@ public class VolumeCalculatorPerformanceTest {
 
     @Ignore
     @Test
-    public void loopPerformanceTest() {
-        waterCalculator.setVolumeCalculator(new LoopCalculator());
+    public void twoWayLoopPerformanceTest() {
+        waterCalculator.setVolumeCalculator(new TwoWayLoopCalculator());
         long startTime = System.currentTimeMillis();
         waterCalculator.calculate(item.getHills());
         System.out.println("Loop calculator stream for " + item.getHills().length
@@ -48,8 +48,8 @@ public class VolumeCalculatorPerformanceTest {
 
     @Ignore
     @Test
-    public void recursionPerformanceTest() {
-        waterCalculator.setVolumeCalculator(new RecursionCalculator());
+    public void oneWayLoopPerformanceTest() {
+        waterCalculator.setVolumeCalculator(new OneWayLoopCalculator());
         long startTime = System.currentTimeMillis();
         waterCalculator.calculate(item.getHills());
         System.out.println("Recursion calculator stream for " + item.getHills().length
@@ -61,8 +61,8 @@ public class VolumeCalculatorPerformanceTest {
         System.out.println("Preparing...");
         for (int i = 0; i < 10; i++) {
             init();
-            loopPerformanceTest();
-            recursionPerformanceTest();
+            twoWayLoopPerformanceTest();
+            oneWayLoopPerformanceTest();
         }
         System.out.println("Done!");
     }

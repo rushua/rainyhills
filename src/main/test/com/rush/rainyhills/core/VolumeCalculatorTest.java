@@ -25,32 +25,32 @@ public class VolumeCalculatorTest {
     }
 
     @Test
-    public void volumeLoopCalculateTest() {
-        waterCalculator.setVolumeCalculator(new LoopCalculator());
+    public void volumeTwoWayLoopCalculateTest() {
+        waterCalculator.setVolumeCalculator(new TwoWayLoopCalculator());
         Arrays.stream(items).forEach(
                 item -> Assert.assertEquals("Failed: " + item, item.getTotal(), waterCalculator.calculate(item.getHills()))
         );
     }
 
     @Test
-    public void volumeRecursionCalculateTest() {
-        waterCalculator.setVolumeCalculator(new RecursionCalculator());
+    public void volumeOneWayLoopCalculateTest() {
+        waterCalculator.setVolumeCalculator(new OneWayLoopCalculator());
         Arrays.stream(items).forEach(
                 item -> Assert.assertEquals("Failed: " + item, item.getTotal(), waterCalculator.calculate(item.getHills()))
         );
     }
 
     @Test
-    public void arrayLoopCalculateTest() {
-        waterCalculator.setVolumeCalculator(new LoopCalculator());
+    public void arrayTwoWayLoopCalculateTest() {
+        waterCalculator.setVolumeCalculator(new TwoWayLoopCalculator());
         Arrays.stream(items).forEach(
                 item -> Assert.assertArrayEquals("Failed: " + item, item.getVolumes(), waterCalculator.calculateArray(item.getHills()))
         );
     }
 
     @Test
-    public void arrayRecursionCalculateTest() {
-        waterCalculator.setVolumeCalculator(new RecursionCalculator());
+    public void arrayOneWayLoopCalculateTest() {
+        waterCalculator.setVolumeCalculator(new OneWayLoopCalculator());
         Arrays.stream(items).forEach(
                 item -> Assert.assertArrayEquals("Failed: " + item, item.getVolumes(), waterCalculator.calculateArray(item.getHills()))
         );
@@ -59,7 +59,7 @@ public class VolumeCalculatorTest {
     @Ignore
     @Test
     public void partVolumeCalculateTest() {
-        waterCalculator.setVolumeCalculator(new RecursionCalculator());
+        waterCalculator.setVolumeCalculator(new OneWayLoopCalculator());
         TestItemUtil.TestItem item = items[28];
         Assert.assertEquals("Failed: " + item, item.getTotal(), waterCalculator.calculate(item.getHills()));
     }
@@ -67,7 +67,7 @@ public class VolumeCalculatorTest {
     @Ignore
     @Test
     public void partArrayCalculateTest() {
-        waterCalculator.setVolumeCalculator(new RecursionCalculator());
+        waterCalculator.setVolumeCalculator(new TwoWayLoopCalculator());
         TestItemUtil.TestItem item = items[28];
         Assert.assertArrayEquals("Failed: " + item, item.getVolumes(), waterCalculator.calculateArray(item.getHills()));
     }

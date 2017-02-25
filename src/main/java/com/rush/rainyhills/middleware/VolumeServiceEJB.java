@@ -1,6 +1,6 @@
 package com.rush.rainyhills.middleware;
 
-import com.rush.rainyhills.core.LoopCalculator;
+import com.rush.rainyhills.core.TwoWayLoopCalculator;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -18,7 +18,7 @@ public class VolumeServiceEJB implements IVolumeService {
 
     @PostConstruct
     public void init() {
-        waterCalculator.setVolumeCalculator(new LoopCalculator());
+        waterCalculator.setVolumeCalculator(new TwoWayLoopCalculator());
     }
 
     @Override
