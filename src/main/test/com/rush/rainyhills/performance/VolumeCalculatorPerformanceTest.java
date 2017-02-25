@@ -1,6 +1,5 @@
 package com.rush.rainyhills.performance;
 
-import com.rush.rainyhills.TestItemUtil;
 import com.rush.rainyhills.core.TwoWayLoopCalculator;
 import com.rush.rainyhills.core.OneWayLoopCalculator;
 import com.rush.rainyhills.middleware.WaterCalculator;
@@ -17,7 +16,8 @@ import java.util.*;
  */
 public class VolumeCalculatorPerformanceTest {
     private WaterCalculator waterCalculator;
-    private TestItemUtil.TestItem item;
+    private int[] hills;
+
     private int hillCount = 2000;
     private int maxInt = 100;
 
@@ -26,12 +26,10 @@ public class VolumeCalculatorPerformanceTest {
         Random random = new Random();
 
         hillCount = hillCount * 2;
-        int[] hills = new int[hillCount];
+        hills = new int[hillCount];
         for (int n = 0; n < hills.length; n++) {
             hills[n] = random.nextInt(maxInt);
         }
-
-        item = new TestItemUtil.TestItem(hills, hills, 0);
 
         waterCalculator = new WaterCalculator();
     }
@@ -41,8 +39,8 @@ public class VolumeCalculatorPerformanceTest {
     public void twoWayLoopPerformanceTest() {
         waterCalculator.setVolumeCalculator(new TwoWayLoopCalculator());
         long startTime = System.currentTimeMillis();
-        waterCalculator.calculate(item.getHills());
-        System.out.println("TwoWayLoop calculator stream for " + item.getHills().length
+        waterCalculator.calculate(hills);
+        System.out.println("TwoWayLoop calculator stream for " + hills.length
                 + " item(s) -> " + (System.currentTimeMillis() - startTime) + " ms");
     }
 
@@ -51,8 +49,8 @@ public class VolumeCalculatorPerformanceTest {
     public void oneWayLoopPerformanceTest() {
         waterCalculator.setVolumeCalculator(new OneWayLoopCalculator());
         long startTime = System.currentTimeMillis();
-        waterCalculator.calculate(item.getHills());
-        System.out.println("OneWayLoop calculator stream for " + item.getHills().length
+        waterCalculator.calculate(hills);
+        System.out.println("OneWayLoop calculator stream for " + hills.length
                 + " item(s) -> " + (System.currentTimeMillis() - startTime) + " ms");
     }
 
