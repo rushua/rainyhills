@@ -42,7 +42,7 @@ public class VolumeCalculatorPerformanceTest {
         waterCalculator.setVolumeCalculator(new TwoWayLoopCalculator());
         long startTime = System.currentTimeMillis();
         waterCalculator.calculate(item.getHills());
-        System.out.println("Loop calculator stream for " + item.getHills().length
+        System.out.println("TwoWayLoop calculator stream for " + item.getHills().length
                 + " item(s) -> " + (System.currentTimeMillis() - startTime) + " ms");
     }
 
@@ -52,7 +52,7 @@ public class VolumeCalculatorPerformanceTest {
         waterCalculator.setVolumeCalculator(new OneWayLoopCalculator());
         long startTime = System.currentTimeMillis();
         waterCalculator.calculate(item.getHills());
-        System.out.println("Recursion calculator stream for " + item.getHills().length
+        System.out.println("OneWayLoop calculator stream for " + item.getHills().length
                 + " item(s) -> " + (System.currentTimeMillis() - startTime) + " ms");
     }
 
