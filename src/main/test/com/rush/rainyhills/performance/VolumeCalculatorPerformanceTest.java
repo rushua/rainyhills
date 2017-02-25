@@ -18,7 +18,7 @@ import java.util.*;
 public class VolumeCalculatorPerformanceTest {
     private WaterCalculator waterCalculator;
     private TestItemUtil.TestItem item;
-    private int hillCount = 10000;
+    private int hillCount = 2000;
     private int maxInt = 100;
 
     @Before
