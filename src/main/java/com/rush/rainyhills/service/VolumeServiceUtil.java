@@ -12,13 +12,14 @@ import java.util.regex.Pattern;
 public abstract class VolumeServiceUtil {
     private final static Pattern arrayPattern = Pattern.compile("\\[([\\d,]*)\\]");
 
-    public static int[] parse(String hills) {
+    public static int[] toArray(String hills) {
         Matcher matcher = arrayPattern.matcher(hills);
         if (matcher.matches()) {
             return Arrays
                     .stream(matcher.group(1).split(","))
                     .filter(hill -> !hill.isEmpty())
-                    .mapToInt(Integer::valueOf).toArray();
+                    .mapToInt(Integer::valueOf)
+                    .toArray();
         }
         return new int[]{};
     }

@@ -14,15 +14,15 @@ public class VolumeServiceUtilTest {
 
     @Test
     public void parseTest() {
-        Assert.assertArrayEquals(new int[]{}, parse("[]"));
-        Assert.assertArrayEquals(new int[]{}, parse("[,]"));
-        Assert.assertArrayEquals(new int[]{}, parse("[,,]"));
-        Assert.assertArrayEquals(new int[]{0}, parse("[0]"));
-        Assert.assertArrayEquals(new int[]{0, 1, 2}, parse("[0,1,2]"));
-        Assert.assertArrayEquals(new int[]{0, 1, 2}, parse("[,0,1,2,]"));
-        Assert.assertArrayEquals(new int[]{0, 1, 2}, parse("[,0,1,2,]"));
-        Assert.assertArrayEquals(new int[]{0, 1, 2}, parse("[0,,1,,2]"));
-        Assert.assertArrayEquals(new int[]{0, 1, 2}, parse("[,,0,1,2,,]"));
+        Assert.assertArrayEquals(new int[]{}, toArray("[]"));
+        Assert.assertArrayEquals(new int[]{}, toArray("[,]"));
+        Assert.assertArrayEquals(new int[]{}, toArray("[,,]"));
+        Assert.assertArrayEquals(new int[]{0}, toArray("[0]"));
+        Assert.assertArrayEquals(new int[]{0, 1, 2}, toArray("[0,1,2]"));
+        Assert.assertArrayEquals(new int[]{0, 1, 2}, toArray("[,0,1,2,]"));
+        Assert.assertArrayEquals(new int[]{0, 1, 2}, toArray("[,0,1,2,]"));
+        Assert.assertArrayEquals(new int[]{0, 1, 2}, toArray("[0,,1,,2]"));
+        Assert.assertArrayEquals(new int[]{0, 1, 2}, toArray("[,,0,1,2,,]"));
     }
 
     @Test

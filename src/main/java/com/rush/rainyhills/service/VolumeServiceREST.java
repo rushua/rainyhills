@@ -28,7 +28,7 @@ public class VolumeServiceREST {
     public Response getVolume(@QueryParam("hills") String hills) {
         try {
             if (isArray(hills)) {
-                int[] hillArray = parse(hills);
+                int[] hillArray = toArray(hills);
                 if (isPositive(hillArray)) {
                     int volume = volumeService.getVolume(hillArray);
                     return Response.ok(VOLUME + " = " + volume).header(VOLUME, volume).build();
@@ -36,7 +36,7 @@ public class VolumeServiceREST {
             }
             return Response.status(Response.Status.BAD_REQUEST).build();
         } catch (Exception e) {
-            return Response.serverError().entity("Server error: " + e.getMessage()).build();
+            return Response.serverError().entity(e.getMessage()).build();
         }
     }
 
@@ -45,7 +45,7 @@ public class VolumeServiceREST {
     public Response getChart(@QueryParam("hills") String hills) {
         try {
             if (isArray(hills)) {
-                int[] hillArray = parse(hills);
+                int[] hillArray = toArray(hills);
                 if (isPositive(hillArray)) {
                     int[] volumes = volumeService.getVolumes(hillArray);
                     VolumeChart volumeChart = new VolumeChart(hillArray, volumes);
@@ -54,7 +54,7 @@ public class VolumeServiceREST {
             }
             return Response.status(Response.Status.BAD_REQUEST).build();
         } catch (Exception e) {
-            return Response.serverError().entity("Server error: " + e.getMessage()).build();
+            return Response.serverError().entity(e.getMessage()).build();
         }
     }
 }
